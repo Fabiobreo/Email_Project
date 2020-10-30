@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EmailWindow</class>
+ <widget class="QMainWindow" name="EmailWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>758</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Mail Pazienti</string>
+  </property>
+  <widget class="QWidget" name="central_widget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QGroupBox" name="sender_group">
+      <property name="styleSheet">
+       <string notr="true">font:bold</string>
+      </property>
+      <property name="title">
+       <string>Dati Mittente</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="sender_widget" native="true">
+         <property name="styleSheet">
+          <string notr="true">font:normal</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="topMargin">
+           <number>9</number>
+          </property>
+          <property name="rightMargin">
+           <number>9</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>6</number>
+          </property>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="sender_password_line_edit">
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="sender_password_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>&lt;b&gt;Password&lt;/b&gt;</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::RichText</enum>
+            </property>
+            <property name="indent">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="sender_email_line_edit"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="sender_email_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>&lt;b&gt;Email&lt;/b&gt;</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::RichText</enum>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <property name="indent">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="see_password_check_box">
+            <property name="text">
+             <string>Mostra password</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="patient_group">
+      <property name="styleSheet">
+       <string notr="true">font:bold</string>
+      </property>
+      <property name="title">
+       <string>Dati Paziente</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="patient_widget" native="true">
+         <property name="styleSheet">
+          <string notr="true">font:normal</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="4" column="2">
+           <widget class="QPushButton" name="edit_report_button">
+            <property name="text">
+             <string>Modifica</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="email_label">
+            <property name="styleSheet">
+             <string notr="true">font:bold</string>
+            </property>
+            <property name="text">
+             <string>Email</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="born_label">
+            <property name="styleSheet">
+             <string notr="true">font:bold</string>
+            </property>
+            <property name="text">
+             <string>Data di nascita</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="surname_line_edit"/>
+          </item>
+          <item row="1" column="2">
+           <widget class="QDateEdit" name="born_date_edit"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="surname_label">
+            <property name="styleSheet">
+             <string notr="true">font:bold</string>
+            </property>
+            <property name="text">
+             <string>Cognome</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="name_line_edit"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="report_label">
+            <property name="styleSheet">
+             <string notr="true">font:bold</string>
+            </property>
+            <property name="text">
+             <string>Referto</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QLineEdit" name="report_line_edit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="name_label">
+            <property name="styleSheet">
+             <string notr="true">font:bold</string>
+            </property>
+            <property name="text">
+             <string>Nome</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLineEdit" name="email_line_edit"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="email_group">
+      <item row="0" column="0">
+       <widget class="QLabel" name="first_email_label">
+        <property name="styleSheet">
+         <string notr="true">font:bold</string>
+        </property>
+        <property name="text">
+         <string>Contenuto prima mail</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPlainTextEdit" name="second_email_text"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="second_email_label">
+        <property name="styleSheet">
+         <string notr="true">font:bold</string>
+        </property>
+        <property name="text">
+         <string>Contenuto seconda mail</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" rowspan="2">
+       <widget class="QPlainTextEdit" name="first_email_text"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="second_email_line_edit">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="send_button">
+      <property name="text">
+       <string>Invia</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
