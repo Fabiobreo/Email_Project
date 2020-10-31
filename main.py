@@ -30,6 +30,8 @@ def create_pdf():
     resultPdf = open('H:\\Prova2.pdf', 'wb')
     pdfWriter.write(resultPdf)
     resultPdf.close()
+    #pyuic5 -x ui\email.ui -o ui_email.py
+
 
 def send_email():
     mes = MIMEMultipart()
@@ -87,6 +89,44 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
                                                   options=options)
         if filename:
             self.report_line_edit.setText(filename)
+
+    @pyqtSlot()
+    def on_edit_bill_button_clicked(self) -> None:
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        filename, _ = QFileDialog.getOpenFileName(self, 'Seleziona la fattura',
+                                                  os.path.normpath(os.path.expanduser('~/Desktop')), 'File pdf (*.pdf)',
+                                                  options=options)
+        if filename:
+            self.bill_line_edit.setText(filename)
+
+    @pyqtSlot()
+    def on_send_button_clicked(self) -> None:
+        self.create_password()
+
+    @pyqtSlot(str)
+    def on_surname_line_edit_textChanged(self, text: str) -> None:
+        self.create_password()
+
+    @pyqtSlot(str)
+    def on_name_line_edit_textChanged(self, text: str) -> None:
+        self.create_password()
+
+    @pyqtSlot(QDate)
+    def on_born_date_edit_dateChanged(self, date: QDate) -> None:
+        self.create_password()
+
+    def create_password(self) -> str:
+        password = ''
+        if len(self.surname_line_edit.text()) > 0:
+            password += self.surname_line_edit.text()[0].upper()
+        password += '.'
+        if len(self.name_line_edit.text()) > 0:
+            password += self.name_line_edit.text()[0].lower()
+        date = self.born_date_edit.date()
+        password += str(date.day()).zfill(2) + str(date.month()).zfill(2) + str(date.year())
+        self.second_email_line_edit.setText(password)
+        return password
 
 
 if __name__ == '__main__':
