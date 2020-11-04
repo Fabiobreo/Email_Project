@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Mail Pazienti</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icon.jpg</normaloff>:/icon.jpg</iconset>
+  </property>
   <widget class="QWidget" name="central_widget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -253,37 +257,105 @@
     </item>
     <item>
      <layout class="QGridLayout" name="email_group">
-      <item row="0" column="0">
+      <item row="0" column="0" alignment="Qt::AlignHCenter">
        <widget class="QLabel" name="first_email_label">
         <property name="styleSheet">
          <string notr="true">font:bold</string>
         </property>
         <property name="text">
-         <string>Contenuto prima mail</string>
+         <string>Prima mail</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="2" column="1">
        <widget class="QPlainTextEdit" name="second_email_text"/>
       </item>
-      <item row="0" column="1">
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="second_email_line_edit">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" rowspan="2">
+       <widget class="QPlainTextEdit" name="first_email_text"/>
+      </item>
+      <item row="0" column="1" alignment="Qt::AlignHCenter">
        <widget class="QLabel" name="second_email_label">
         <property name="styleSheet">
          <string notr="true">font:bold</string>
         </property>
         <property name="text">
-         <string>Contenuto seconda mail</string>
+         <string>Seconda mail</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" rowspan="2">
-       <widget class="QPlainTextEdit" name="first_email_text"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="second_email_line_edit">
-        <property name="readOnly">
-         <bool>true</bool>
+      <item row="1" column="0">
+       <widget class="QWidget" name="first_mail_widget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
         </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="first_mail_subject_label">
+           <property name="styleSheet">
+            <string notr="true">font:bold</string>
+           </property>
+           <property name="text">
+            <string>Oggetto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="first_mail_subject"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QWidget" name="second_mail_widget" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="second_mail_subject_label">
+           <property name="styleSheet">
+            <string notr="true">font:bold</string>
+           </property>
+           <property name="text">
+            <string>Oggetto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="second_mail_subject"/>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -309,6 +381,52 @@
     </item>
    </layout>
   </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="load_action"/>
+   <addaction name="save_action"/>
+  </widget>
+  <action name="load_action">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/folder.png</normaloff>:/folder.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load</string>
+   </property>
+   <property name="toolTip">
+    <string>Load</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="save_action">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/save.jpg</normaloff>:/save.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>sender_email_line_edit</tabstop>
@@ -319,7 +437,9 @@
   <tabstop>edit_report_button</tabstop>
   <tabstop>edit_bill_button</tabstop>
   <tabstop>email_line_edit</tabstop>
+  <tabstop>first_mail_subject</tabstop>
   <tabstop>first_email_text</tabstop>
+  <tabstop>second_mail_subject</tabstop>
   <tabstop>second_email_text</tabstop>
   <tabstop>send_button</tabstop>
   <tabstop>see_password_check_box</tabstop>
@@ -327,6 +447,8 @@
   <tabstop>bill_line_edit</tabstop>
   <tabstop>second_email_line_edit</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
