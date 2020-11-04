@@ -7,67 +7,17 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 import os
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtGui
 from os.path import basename
 
 import PyPDF2
 import smtplib
 
-from PyQt5.QtCore import pyqtSlot, QDate, QSettings, QEventLoop, QTimer, pyqtSignal, QObject, QRunnable, Qt, QThread
-from PyQt5.QtWidgets import QFileDialog, QLineEdit, QMessageBox, QProgressDialog, QDialog
+from PyQt5.QtCore import pyqtSlot, QDate, QSettings, pyqtSignal, Qt, QThread
+from PyQt5.QtWidgets import QFileDialog, QLineEdit, QMessageBox, QDialog
 
 from progress_window_ui import Ui_dialog
 from ui_email import Ui_EmailWindow
-
-
-def create_pdf():
-    pdfFile = open('H:\\Prova.pdf', 'rb')
-    # Create reader and writer object
-    pdfReader = PyPDF2.PdfFileReader(pdfFile)
-    pdfWriter = PyPDF2.PdfFileWriter()
-    # Add all pages to writer (accepted answer results into blank pages)
-    for pageNum in range(pdfReader.numPages):
-        pdfWriter.addPage(pdfReader.getPage(pageNum))
-    # Encrypt with your password
-    pdfWriter.encrypt('password')
-    # Write it to an output file. (you can delete unencrypted version now)
-    resultPdf = open('H:\\Prova2.pdf', 'wb')
-    pdfWriter.write(resultPdf)
-    resultPdf.close()
-    # pyuic5 -x ui\email.ui -o ui_email.py
-
-
-def send_email():
-    mes = MIMEMultipart()
-    mes["From"] = "breaPython@gmail.com"
-    mes["To"] = "fabio.brea@gmail.com"
-    mes["Subject"] = "TopKek"
-
-    body = MIMEText("Yolo swag", "plain")
-    mes.attach(body)
-
-    files = ['H:\\Prova.pdf']
-
-    for f in files or []:
-        with open(f, "rb") as fil:
-            part = MIMEApplication(
-                fil.read(),
-                Name=basename(f)
-            )
-        # After the file is closed
-        part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
-        mes.attach(part)
-
-    try:
-        mail = smtplib.SMTP("smtp.gmail.com", 587)
-        mail.ehlo()
-        mail.starttls()
-        mail.login("breaPython@gmail.com", "python92")
-        mail.sendmail(mes["from"], mes["To"], mes.as_string())
-        mail.close()
-    except:
-        sys.stderr.write("Failed....")
-        sys.stderr.flush()
 
 
 class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
@@ -79,7 +29,7 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
         self.regex = '^[a-zA-Z0-9]+[\\._]?[a-zA-Z0-9]+[@]\\w+[.]\\w+$'
 
     @pyqtSlot()
-    def on_see_password_check_box_clicked(self):
+    def on_see_password_check_box_clicked(self) -> None:
         if self.see_password_check_box.isChecked():
             self.sender_password_line_edit.setEchoMode(QtWidgets.QLineEdit.Normal)
         else:
@@ -110,11 +60,11 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
             settings.setValue('default_dir_key', filename)
 
     @pyqtSlot(str)
-    def on_sender_email_line_edit_textChanged(self):
+    def on_sender_email_line_edit_textChanged(self) -> None:
         self.check_email(self.sender_email_line_edit)
 
     @pyqtSlot(str)
-    def on_email_line_edit_textChanged(self):
+    def on_email_line_edit_textChanged(self) -> None:
         self.check_email(self.email_line_edit)
 
     @pyqtSlot()
@@ -220,7 +170,7 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
                 line_edit.setStyleSheet('border: 1.5px solid red')
                 return False
 
-    def send_email(self):
+    def send_email(self) -> None:
         progress_dialog = ProgressDownloader(self)
         progress_dialog.show()
         date = str(self.born_date_edit.date().day()) + '/' + str(self.born_date_edit.date().month()) + '/' + str(
@@ -292,7 +242,7 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
 class SenderThread(QThread):
     sending_progress = pyqtSignal(str, int)
 
-    def __init__(self, parent, **kwargs):
+    def __init__(self, parent, **kwargs) -> None:
         QThread.__init__(self, parent)
         self.sender_email = kwargs['sender_email']
         self.sender_pwd = kwargs['sender_pwd']
@@ -409,7 +359,7 @@ class ProgressDownloader(QDialog, Ui_dialog):
                                 QMessageBox.Ok)
 
     @pyqtSlot(str, int)
-    def set_progress(self, message: str, progress: int):
+    def set_progress(self, message: str, progress: int) -> None:
         self.message_label.setText(message)
         self.progress_bar.setValue(progress)
         if progress == 100:
