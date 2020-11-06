@@ -150,12 +150,12 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="5" column="0">
-           <widget class="QLabel" name="bill_label">
+           <widget class="QLabel" name="attachment_label">
             <property name="styleSheet">
              <string notr="true">font:bold</string>
             </property>
             <property name="text">
-             <string>Fattura</string>
+             <string>Allegati</string>
             </property>
            </widget>
           </item>
@@ -236,14 +236,14 @@
            <widget class="QLineEdit" name="email_line_edit"/>
           </item>
           <item row="6" column="2">
-           <widget class="QPushButton" name="edit_bill_button">
+           <widget class="QPushButton" name="edit_attachment_button">
             <property name="text">
              <string>Modifica</string>
             </property>
            </widget>
           </item>
           <item row="6" column="0" colspan="2">
-           <widget class="QLineEdit" name="bill_line_edit">
+           <widget class="QLineEdit" name="attachment_line_edit">
             <property name="readOnly">
              <bool>true</bool>
             </property>
@@ -435,7 +435,7 @@
   <tabstop>name_line_edit</tabstop>
   <tabstop>born_date_edit</tabstop>
   <tabstop>edit_report_button</tabstop>
-  <tabstop>edit_bill_button</tabstop>
+  <tabstop>edit_attachment_button</tabstop>
   <tabstop>email_line_edit</tabstop>
   <tabstop>first_mail_subject</tabstop>
   <tabstop>first_email_text</tabstop>
@@ -444,7 +444,7 @@
   <tabstop>send_button</tabstop>
   <tabstop>see_password_check_box</tabstop>
   <tabstop>report_line_edit</tabstop>
-  <tabstop>bill_line_edit</tabstop>
+  <tabstop>attachment_line_edit</tabstop>
   <tabstop>second_email_line_edit</tabstop>
  </tabstops>
  <resources>

@@ -48,16 +48,19 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
             settings.setValue('default_dir_key', filename)
 
     @pyqtSlot()
-    def on_edit_bill_button_clicked(self) -> None:
+    def on_edit_attachment_button_clicked(self) -> None:
         settings = QSettings()
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        filename, _ = QFileDialog.getOpenFileName(self, 'Seleziona la fattura',
-                                                  settings.value('default_dir_key'), 'File pdf (*.pdf)',
-                                                  options=options)
-        if filename:
-            self.bill_line_edit.setText(filename)
-            settings.setValue('default_dir_key', filename)
+        file_list, _ = QFileDialog.getOpenFileNames(self, 'Seleziona la fattura', settings.value('default_dir_key'),
+                                                    'File pdf (*.pdf)', options=options)
+        if len(file_list) > 0:
+            attachment_text = ''
+            for file in file_list:
+                attachment_text += file + ', '
+            attachment_text = attachment_text[:-2]
+
+            self.attachment_line_edit.setText(attachment_text)
 
     @pyqtSlot(str)
     def on_sender_email_line_edit_textChanged(self) -> None:
@@ -129,7 +132,7 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
         self.surname_line_edit.clear()
         self.name_line_edit.clear()
         self.report_line_edit.clear()
-        self.bill_line_edit.clear()
+        self.attachment_line_edit.clear()
         self.email_line_edit.clear()
         default_date = QDate(2000, 1, 1)
         self.born_date_edit.setDate(default_date)
@@ -175,6 +178,7 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
         progress_dialog.show()
         date = str(self.born_date_edit.date().day()) + '/' + str(self.born_date_edit.date().month()) + '/' + str(
             self.born_date_edit.date().year())
+        attachment = self.attachment_line_edit.text().split(', ')
         sender_thread = SenderThread(self,
                                      sender_email=self.sender_email_line_edit.text(),
                                      sender_pwd=self.sender_password_line_edit.text(),
@@ -188,7 +192,7 @@ class EmailSender(QtWidgets.QMainWindow, Ui_EmailWindow):
                                      second_body=self.second_email_text.toPlainText(),
                                      report=self.report_line_edit.text(),
                                      encrypted_password=self.second_email_line_edit.text(),
-                                     bill=self.bill_line_edit.text())
+                                     attachment=attachment)
         sender_thread.sending_progress.connect(progress_dialog.set_progress)
         sender_thread.start()
 
@@ -256,7 +260,7 @@ class SenderThread(QThread):
         self.second_body = kwargs['second_body']
         self.report = kwargs['report']
         self.encrypted_password = kwargs['encrypted_password']
-        self.bill = kwargs['bill']
+        self.attachment = kwargs['attachment']
 
     def run(self) -> None:
         self.sending_progress.emit('Creo il pdf con password...', 0)
@@ -272,8 +276,8 @@ class SenderThread(QThread):
         files = [self.create_pdf_with_password()]
         self.sending_progress.emit('Invio la prima email', 30)
 
-        if len(self.bill) > 0:
-            files.append(self.bill)
+        if len(self.attachment) > 0:
+            files.extend(self.attachment)
 
         for f in files or []:
             with open(f, "rb") as fil:
